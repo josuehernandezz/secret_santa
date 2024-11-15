@@ -1,0 +1,37 @@
+<!-- templates/_base.html -->
+
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    {% endcompress %}
+
+</head>
+
+<body class="bg-slate-200 dark:bg-dark-hi">
+
+    {% include 'blocks/navbar.html' %}
+
+    <div class="container mx-auto mt-10">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    {% include 'blocks/footer.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+</body>
+
+</html>
