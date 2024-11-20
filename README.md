@@ -59,7 +59,9 @@ This project does **not** directly edit the original repository. Any changes mad
 6. **Create environment variables file:**
 
     ```bash
+    cd ..
     touch .env
+    ```
 
 7. **Generate a secure SECRET_KEY and add it to .env file:**
 

@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-      '../django/templates/**/*.html',
+      '../django/**/templates/**/*.html',
       './node_modules/flowbite/**/*.js'
   ],
   theme: {

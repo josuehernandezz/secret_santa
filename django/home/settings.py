@@ -12,11 +12,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from decouple import config
 from pathlib import Path
+from datetime import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 PROJECT_NAME = config('PROJECT_NAME', default="Project")
+PROJECT_YEAR = datetime.now().year
 
 # Configure Gmail for Django Emails: https://www.codingforentrepreneurs.com/blog/sending-email-in-django-from-gmail/
 
@@ -59,7 +61,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'compressor',
-    'content'
+    'content',
+    'secret_santa',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -96,13 +100,23 @@ WSGI_APPLICATION = 'home.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config("DB_NAME", default=None),     # The name of your PostgreSQL database
+        'USER': config("DB_USER", default=None),               # The PostgreSQL user (e.g., 'postgres')
+        'PASSWORD': config("DB_PASSWORD", default=None),      # The password for your PostgreSQL user
+        'HOST': config("DB_HOST", default=None),              # Host of the PostgreSQL server (use 'localhost' for local)
+        'PORT': config("DB_PORT", default=None),                   # Default PostgreSQL port
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -122,13 +136,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = 'signin'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
