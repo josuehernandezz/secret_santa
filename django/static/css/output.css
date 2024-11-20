@@ -1596,11 +1596,6 @@ input:checked + .toggle-bg {
   background-color: rgb(255 255 255 / 0.5);
 }
 
-.bg-dark-lt {
-  --tw-bg-opacity: 1;
-  background-color: rgb(63 63 70 / var(--tw-bg-opacity));
-}
-
 .bg-\[url\(\'https\:\/\/flowbite\.s3\.amazonaws\.com\/docs\/jumbotron\/hero-pattern\.svg\'\)\] {
   background-image: url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern.svg');
 }
@@ -2114,6 +2109,16 @@ input:checked + .toggle-bg {
     background-color: rgb(35 56 118 / var(--tw-bg-opacity));
   }
 
+  .dark\:bg-dark-hi {
+    --tw-bg-opacity: 1;
+    background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-dark-md {
+    --tw-bg-opacity: 1;
+    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+  }
+
   .dark\:bg-gray-600 {
     --tw-bg-opacity: 1;
     background-color: rgb(75 85 99 / var(--tw-bg-opacity));
@@ -2140,26 +2145,6 @@ input:checked + .toggle-bg {
 
   .dark\:bg-gray-900\/80 {
     background-color: rgb(17 24 39 / 0.8);
-  }
-
-  .dark\:bg-zinc-800 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
-  }
-
-  .dark\:bg-zinc-900 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(24 24 27 / var(--tw-bg-opacity));
-  }
-
-  .dark\:bg-dark-hi {
-    --tw-bg-opacity: 1;
-    background-color: rgb(24 24 27 / var(--tw-bg-opacity));
-  }
-
-  .dark\:bg-dark-md {
-    --tw-bg-opacity: 1;
-    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
   }
 
   .dark\:bg-\[url\(\'https\:\/\/flowbite\.s3\.amazonaws\.com\/docs\/jumbotron\/hero-pattern-dark\.svg\'\)\] {
@@ -2275,11 +2260,6 @@ input:checked + .toggle-bg {
 
 @media (min-width: 768px) {
   @media (prefers-color-scheme: dark) {
-    .md\:dark\:bg-gray-900 {
-      --tw-bg-opacity: 1;
-      background-color: rgb(17 24 39 / var(--tw-bg-opacity));
-    }
-
     .md\:dark\:bg-dark-md {
       --tw-bg-opacity: 1;
       background-color: rgb(39 39 42 / var(--tw-bg-opacity));
