@@ -44,8 +44,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 if DEBUG:
     ALLOWED_HOSTS = [
-        'localhost'
-        '127.0.0.1'
+        '*'
     ]
 ALLOWED_HOSTS = [
     '*'
@@ -54,6 +53,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -95,7 +95,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'home.wsgi.application'
+ASGI_APPLICATION = "home.asgi.application"
 
+TICKS_GROUP_NAME = 'secret_santa'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

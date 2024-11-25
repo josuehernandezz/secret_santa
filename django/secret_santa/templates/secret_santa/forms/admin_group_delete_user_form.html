@@ -1,0 +1,12 @@
+<h3 class="text-center text-green-500 text-md font-medium mb-2">Delete user from group</h3>
+<form method="POST" action="{% url 'remove_user_from_group' group.code %}">
+    {% csrf_token %}
+
+    {% for field in delete_user_from_group_form %}
+        {% include 'blocks/django_form_loop.html' %}
+    {% endfor %}
+
+    <button type="submit" class="w-1/2 bg-red-500 text-white p-2 rounded mt-4">
+        Delete User
+    </button>
+</form>

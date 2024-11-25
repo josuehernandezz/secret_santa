@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mt-5 space-y-3 mx-auto sm:w-full md:w-3/5 bg-gray-100 dark:bg-dark-md rounded-md border-2 p-5 border-slate-200 dark:border-slate-700">
+
+    <div class="text-center">
+        <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Your Group(s):</h2>
+        <ul class=" space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
+            {% if groups %}
+                {% for group in groups %}
+                <li>
+                    <a href="{% url 'group_detail_view' group.code %}">
+                        <span class="text-red-500">
+                            {{ group.name|capfirst }}
+                        </span>
+                        |
+                        <span class="text-green-500">
+                            {{ group.code|capfirst }}
+                        </span>
+                    </a>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li>
+                        <p class="text-green-500">
+                            It looks like you aren't in any groups.
+                        </p>
+                        <!-- <p class="text-green-500"> -->
+                    <a class="text-red-500 underline" href="{% url 'secret_santa' %}">Create a group or join</a>!
+                        <!-- </p> -->
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+        
+</div>
+{% endblock %}

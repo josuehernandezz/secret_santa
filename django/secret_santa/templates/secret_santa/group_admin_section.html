@@ -1,0 +1,57 @@
+{% if group_form and user_is_admin %}
+    <h3 class="text-red-500 text-md font-medium mb-2">Group Members</h3>
+    
+    <ol class="list-disc pl-5 dark:text-white group-members-list">
+        {% for member in members %}
+            <li class="space-x-40" id="member-{{ member.username }}">
+                {{ member.first_name|capfirst }} {{ member.last_name|capfirst }} | {{ member.username }}
+                <span class="gift-status" data-gift-added="{% if member.user_gift_preference.exists %}true{% else %}false{% endif %}">
+                    {% if member.user_gift_preference.exists %}
+                        | Added gift ✅
+                    {% else %}
+                        | No gift added yet ❌
+                    {% endif %}
+                </span>
+                {% if not member == group.admin %}
+                <div data-my-own-attribute="del-user-toggle">
+                    {% include 'secret_santa/modals/delete_user.html' %}
+                </div>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ol>
+
+    {% if members.count >= 2 %}
+    <button id="del-user-toggle-btn" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+        Delete Members
+    </button>
+    {% endif %}
+
+    <button id="toggle-group-update-form" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        Edit Group Information
+    </button>
+
+    {% if not secret_santa_is_activated %}
+        {% if can_activate_secret_santa %}
+            <a href="{% url 'create_assignment' group.code %}" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                Initiate Secret Santa!
+            </a>
+        {% else %}
+            <h2 class="mb-2 text-lg font-semibold text-red-500 dark:text-red-500">Note:</h2>
+            <ul class="space-y-1 text-red-500 list-disc list-inside dark:text-red-500">
+                <li>
+                    Your group must have 3 or more members to initiate the secret santa exchange.
+                </li>
+                <li>
+                    Each member must have submitted their gift preferences.
+                </li>
+            </ul>
+        {% endif %}
+    {% endif%}
+
+    <div id="group-form-container" style="display: none;">
+        <div id="group-update-form">
+            {% include 'secret_santa/forms/admin_group_info_form.html' %}
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,12 @@
+<h3 class="text-center dark:text-white text-md font-medium mb-2">Add Your Gift Preferences</h3>
+<form method="POST" action="{% url 'group_detail_view' group.code %}">
+    {% csrf_token %}
+
+    {% for field in gift_preference_form %}
+        {% include 'blocks/django_form_loop.html' %}
+    {% endfor %}
+
+    <button type="submit" class="w-full bg-green-600 text-white p-2 rounded mt-4">
+        Add Gift Preference
+    </button>
+</form>
