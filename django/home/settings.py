@@ -165,7 +165,7 @@ STATIC_URL = 'static/'
 
 
 # Compressor settings
-COMPRESS_ROOT = BASE_DIR / 'static'
+COMPRESS_ROOT = BASE_DIR / 'collected_static'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
