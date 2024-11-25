@@ -167,6 +167,10 @@ STATIC_ROOT = BASE_DIR / 'collected_static'
 # Compressor settings
 COMPRESS_ROOT = BASE_DIR / 'collected_static'
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
