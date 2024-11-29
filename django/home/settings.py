@@ -108,24 +108,24 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config("DB_NAME", default=None),     # The name of your PostgreSQL database
+        'USER': config("DB_USER", default=None),               # The PostgreSQL user (e.g., 'postgres')
+        'PASSWORD': config("DB_PASSWORD", default=None),      # The password for your PostgreSQL user
+        'HOST': config("DB_HOST", default=None),              # Host of the PostgreSQL server (use 'localhost' for local)
+        'PORT': config("DB_PORT", default=None),                   # Default PostgreSQL port
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config("DB_NAME", default=None),     # The name of your PostgreSQL database
-            'USER': config("DB_USER", default=None),               # The PostgreSQL user (e.g., 'postgres')
-            'PASSWORD': config("DB_PASSWORD", default=None),      # The password for your PostgreSQL user
-            'HOST': config("DB_HOST", default=None),              # Host of the PostgreSQL server (use 'localhost' for local)
-            'PORT': config("DB_PORT", default=None),                   # Default PostgreSQL port
-        }
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
