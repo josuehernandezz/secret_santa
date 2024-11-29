@@ -252,10 +252,23 @@ def assignment_view(request, group_code):
     receiver = assignment.receiver
     gift_preference = GiftPreference.objects.filter(group=group, user=receiver).first()
 
+    # print('gift_preference', gift_preference.gift.split())
+
+    def parse_wishlist(wishlist: str):
+        # Split the input into lines
+        lines = wishlist.split('\n')
+        
+        # Clean up each line: strip leading/trailing spaces and filter out empty lines
+        cleaned_gifts = [line.strip() for line in lines if line.strip()]
+        
+        return cleaned_gifts
+
+    parsed_gifts = parse_wishlist(gift_preference.gift)
+
     context = {
         'group': group,
         'receiver': receiver,
-        'gift_preference_gift': gift_preference.gift,
+        'gift_preference_gift': parsed_gifts,
     }
 
     return render(request, 'secret_santa/assigned_secret_santa.html', context)
