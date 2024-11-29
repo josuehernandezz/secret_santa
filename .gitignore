@@ -24,7 +24,8 @@ media/
 collected_static/
 staticfiles/
 
-# Django compressor CACHE files
+# Django compressor CACHE files and tailwind css output
+output.css
 CACHE/
 
 # Node.js files

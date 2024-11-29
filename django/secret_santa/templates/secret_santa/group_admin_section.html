@@ -1,17 +1,19 @@
+{% load custom_filters %}
+
 {% if group_form and user_is_admin %}
     <h3 class="text-red-500 text-md font-medium mb-2">Group Members</h3>
     
     <ol class="list-disc pl-5 dark:text-white group-members-list">
         {% for member in members %}
-            <li class="space-x-40" id="member-{{ member.username }}">
-                {{ member.first_name|capfirst }} {{ member.last_name|capfirst }} | {{ member.username }}
-                <span class="gift-status" data-gift-added="{% if member.user_gift_preference.exists %}true{% else %}false{% endif %}">
-                    {% if member.user_gift_preference.exists %}
-                        | Added gift ✅
-                    {% else %}
-                        | No gift added yet ❌
-                    {% endif %}
-                </span>
+        <li id="member-{{ member.username }}">
+            {{ member.first_name|capfirst }} {{ member.last_name|capfirst }} | {{ member.username }}
+            <span class="gift-status" data-gift-added="{% if member|has_gift_preference:group %}true{% else %}false{% endif %}">
+                {% if member|has_gift_preference:group %}
+                    | Added gift ✅
+                {% else %}
+                    | No gift added yet ❌
+                {% endif %}
+            </span>
                 {% if not member == group.admin %}
                 <div data-my-own-attribute="del-user-toggle">
                     {% include 'secret_santa/modals/delete_user.html' %}
