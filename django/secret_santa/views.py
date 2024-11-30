@@ -9,18 +9,48 @@ from django.db.models import Prefetch
 from .decorators import user_belongs_to_group, user_is_group_admin
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from django.templatetags.static import static
 
 # Custom
 from .utils import return_members_data
 
 # Create your views here.
 
+# def home(request):
+#     # Generate the absolute URL for the static image in your view
+#     image_url = static('img/secret_santa/bg.jpg')
+#     full_image_url = request.build_absolute_uri(image_url)
+
+#     context = {
+#         'project_name': PROJECT_NAME,
+#         'project_year': PROJECT_YEAR,
+#         'image_url': full_image_url,
+#         'og_title': "Your Cool Website Title",
+#         'og_description': "A short description of the page or product."
+#     }
+#     return render(request, 'secret_santa/home.html', context)
+
+from django.shortcuts import render
+from django.templatetags.static import static
+
 def home(request):
+    # Generate the absolute URL for the static image
+    image_url = static('img/secret_santa_bg.jpg')
+    full_image_url = request.build_absolute_uri(image_url)
+    # Generate the absolute URL for the current page (og:url)
+    full_page_url = request.build_absolute_uri(request.path)
+
     context = {
-        'project_name': PROJECT_NAME,
-        'project_year': PROJECT_YEAR,
+        'project_name': PROJECT_NAME,  # Replace with your actual project name
+        'project_year': PROJECT_YEAR,  # Replace with your actual project year
+        'image_url': full_image_url,
+        'og_title': "Online Secret Santa Gift Exchange!",
+        'og_description': "A short description of the page or product.",
+        'og_url': full_page_url  # Pass the full URL of the current page
     }
+
     return render(request, 'secret_santa/home.html', context)
+
 
 @login_required
 def secret_santa(request):
