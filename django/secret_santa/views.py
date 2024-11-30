@@ -51,7 +51,6 @@ def home(request):
 
     return render(request, 'secret_santa/home.html', context)
 
-
 @login_required
 def secret_santa(request):
     user = request.user
