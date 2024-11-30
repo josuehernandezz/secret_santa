@@ -2,7 +2,7 @@
 
 {% if group_form and user_is_admin %}
     <h3 class="text-red-500 text-md font-medium mb-2">Group Members</h3>
-    
+    <h4 class="dark:text-white">There are <span class="text-red-500">{{ member_count }}</span> group members.</h4>
     <ol class="list-disc pl-5 dark:text-white group-members-list">
         {% for member in members %}
         <li id="member-{{ member.username }}">

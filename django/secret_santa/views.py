@@ -199,11 +199,13 @@ def group_detail_view(request, group_code):
         messages.error(request, 'There was an error with your submission. Please try again.')
         return redirect(reverse('group_detail_view', args=[group_code]))
     else:
+        print('member_count', members.count())
         context = {
             'project_name': PROJECT_NAME,
             'project_year': PROJECT_YEAR,
             'group': group,
             'members': members,
+            'member_count': members.count(),
             'can_activate_secret_santa': can_activate_secret_santa,
             'gift_preference_form': gift_form,  # Pass the gift preference form to the template
             'secret_santa_is_activated': secret_santa_is_activated,
