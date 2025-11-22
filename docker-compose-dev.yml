@@ -1,0 +1,63 @@
+services:
+  web:
+    build: .
+    command: >
+      bash -c "
+        python manage.py makemigrations &&
+        python manage.py migrate &&
+        python manage.py createsuperuser --noinput
+        python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./django:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    env_file:
+      - .env 
+    environment:
+      # Django DB settings
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: db
+      DB_PORT: 5432
+    networks:
+      - app_network
+
+  db:
+    image: postgres:16
+    # ports:
+    #   - 5432:5432
+    env_file:
+      - .env 
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - app_network
+  nginx:
+    image: nginx:alpine
+    # container_name: nginx_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./django:/app
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      # - static_volume:/app/django/collected_static
+      # - ./media:/app/django/media/
+    depends_on:
+      - web
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+    driver: local
+  static_volume:
+    driver: local
+
+networks:
+  app_network:
+    driver: bridge

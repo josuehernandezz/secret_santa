@@ -82,3 +82,9 @@ This project does **not** directly edit the original repository. Any changes mad
 
    ```bash
     python manage.py runserver
+
+11. **Restore from old database**
+
+   ```bash
+   docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"' \
+  < ~/uci-server-backup/server-backup/secret_santa_backup.sql
