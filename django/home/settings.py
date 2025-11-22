@@ -51,6 +51,17 @@ ALLOWED_HOSTS = [
     '*'
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://secretsanta.heusoj.com',
+    'http://secretsanta.heusoj.com',
+    'https://secret_santa.heusoj.com',
+    'http://secret_santa.heusoj.com',
+    'https://localhost',
+    'http://localhost',
+    'https://localhost:8000',
+    'http://localhost:8000',
+    ]
+
 # Application definition
 
 INSTALLED_APPS = [
