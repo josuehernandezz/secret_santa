@@ -25,7 +25,7 @@ collected_static/
 staticfiles/
 
 # Django compressor CACHE files and tailwind css output
-output.css
+# output.css
 CACHE/
 
 # Node.js files
